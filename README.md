@@ -80,6 +80,63 @@ Al utilizar `arp-scan`, es común referirse a dos archivos que contienen informa
 
 Estos archivos son esenciales para interpretar los resultados obtenidos con `arp-scan`, ya que permiten a los usuarios entender mejor la composición de la red al identificar los fabricantes de los dispositivos conectados.
 
+## Análisis de Conectividad con `ping`
+
+Para analizar la conectividad de diferentes direcciones IP en la red utiliza el comando `ping`. Este comando se utiliza para verificar si un host es accesible en una red IP y mide el tiempo de respuesta de los paquetes enviados.
+
+```
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.190.1 -c4
+PING 192.168.190.1 (192.168.190.1) 56(84) bytes of data.
+64 bytes from 192.168.190.1: icmp_seq=1 ttl=128 time=0.453 ms
+64 bytes from 192.168.190.1: icmp_seq=2 ttl=128 time=0.465 ms
+64 bytes from 192.168.190.1: icmp_seq=3 ttl=128 time=0.425 ms
+64 bytes from 192.168.190.1: icmp_seq=4 ttl=128 time=0.426 ms
+
+--- 192.168.190.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3076ms
+rtt min/avg/max/mdev = 0.425/0.442/0.465/0.017 ms
+```
+
+```
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.190.2 -c4
+PING 192.168.190.2 (192.168.190.2) 56(84) bytes of data.
+64 bytes from 192.168.190.2: icmp_seq=1 ttl=128 time=0.195 ms
+64 bytes from 192.168.190.2: icmp_seq=2 ttl=128 time=0.446 ms
+64 bytes from 192.168.190.2: icmp_seq=3 ttl=128 time=0.234 ms
+64 bytes from 192.168.190.2: icmp_seq=4 ttl=128 time=0.421 ms
+
+--- 192.168.190.2 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3061ms
+rtt min/avg/max/mdev = 0.195/0.324/0.446/0.110 ms
+```
+
+```
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.190.130 -c4
+PING 192.168.190.130 (192.168.190.130) 56(84) bytes of data.
+64 bytes from 192.168.190.130: icmp_seq=1 ttl=64 time=0.407 ms
+64 bytes from 192.168.190.130: icmp_seq=2 ttl=64 time=0.632 ms
+64 bytes from 192.168.190.130: icmp_seq=3 ttl=64 time=0.600 ms
+64 bytes from 192.168.190.130: icmp_seq=4 ttl=64 time=0.691 ms
+
+--- 192.168.190.130 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3071ms
+rtt min/avg/max/mdev = 0.407/0.582/0.691/0.106 ms
+```
+
+```
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.190.254 -c4
+PING 192.168.190.254 (192.168.190.254) 56(84) bytes of data.
+
+--- 192.168.190.254 ping statistics ---
+4 packets transmitted, 0 received, 100% packet loss, time 3077ms
+```
+
+
+
 
 
 
