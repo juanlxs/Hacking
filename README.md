@@ -1,6 +1,6 @@
 # DarkHole I
 
-Este documento se centra en el análisis y la explotación de la máquina "Darkhole I", diseñada específicamente para practicar y mejorar habilidades en ciberseguridad.
+Este documento se centra en el análisis y la explotación de la máquina "Darkhole I", diseñada específicamente para practicar y mejorar habilidades en ciberseguridad. Solo sabemos que es una máquina Ubuntu 22.04.2 LTS.
 
 **Máquina atacante**: Kali Linux
 
@@ -135,6 +135,30 @@ PING 192.168.190.254 (192.168.190.254) 56(84) bytes of data.
 4 packets transmitted, 0 received, 100% packet loss, time 3077ms
 ```
 
+Nuestra máquina objetivo es 192.168.190.130. **¿Por qué lo sabemos?**
+
+El valor de TTL (Time to Live) en los paquetes ICMP (como los que se utilizan con el comando ping) puede proporcionar información sobre el sistema operativo del host de destino. En este caso, el TTL de `192.168.190.130` es 64, lo que es un indicativo común de que el sistema operativo es Linux. Aquí hay una explicación más detallada:
+
+**¿Qué es el TTL?**
+
+TTL (Time to Live) es un campo en el encabezado de los paquetes IP que se utiliza para evitar que los paquetes circulen indefinidamente en la red. Cada vez que un paquete pasa por un router, su valor de TTL se decrementa en uno. Cuando el TTL llega a cero, el paquete es descartado.
+
+**TTL y Sistemas Operativos**
+
+El valor inicial de TTL puede variar según el sistema operativo. Aquí hay una tabla de referencia comúnmente citada para varios sistemas operativos:
+
+| Sistema Operativo | Valor TTL Inicial |
+|-------------------|-------------------|
+| Windows           | 128               |
+| Linux             | 64                |
+| macOS             | 64                |
+| FreeBSD           | 255               |
+| Solaris           | 255               |
+| Cisco IOS         | 255               |
+
+**Conclusión**
+
+El TTL puede ser una pista útil para determinar el sistema operativo de un dispositivo remoto. Sin embargo, es importante recordar que este método no es infalible, ya que el valor de TTL puede ser modificado por configuraciones de red o políticas de seguridad. Aun así, en la mayoría de los casos, un TTL de `64` es un buen indicador de que el sistema operativo es Linux.
 
 
 
