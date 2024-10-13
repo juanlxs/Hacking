@@ -177,6 +177,29 @@ Crea una estructura de directorios en tu máquina que sea la siguiente:
 
 - nmap: Este directorio puede contener resultados de escaneos realizados con nmap, lo que te ayudará a mantener un registro de los puertos y servicios identificados en la máquina objetivo.
 
+En mi caso la creado con la función `mkt`:
+
+```
+┌──(kali㉿kali)-[~]
+└─$ mkdir 192.168.190.130
+
+┌──(kali㉿kali)-[~]
+└─$ cd 192.168.190.130
+
+┌──(kali㉿kali)-[~/192.168.190.130]
+└─$ mkt
+
+┌──(kali㉿kali)-[~/192.168.190.130]
+└─$ ls .
+content  exploits  nmap
+
+┌──(kali㉿kali)-[~/192.168.190.130]
+└─$ which mkt
+mkt () {
+        mkdir {nmap,content,exploits}
+}
+```
+
 
 
 
