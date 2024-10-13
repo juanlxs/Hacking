@@ -180,6 +180,14 @@ Crea una estructura de directorios en tu máquina que sea la siguiente:
 En mi caso la creado con la función `mkt`:
 
 ```
+┌──(kali㉿kali)-[~/192.168.190.130]
+└─$ which mkt
+mkt () {
+        mkdir {nmap,content,exploits}
+}
+```
+
+```
 ┌──(kali㉿kali)-[~]
 └─$ mkdir 192.168.190.130
 
@@ -192,12 +200,6 @@ En mi caso la creado con la función `mkt`:
 ┌──(kali㉿kali)-[~/192.168.190.130]
 └─$ ls .
 content  exploits  nmap
-
-┌──(kali㉿kali)-[~/192.168.190.130]
-└─$ which mkt
-mkt () {
-        mkdir {nmap,content,exploits}
-}
 ```
 
 
