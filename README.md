@@ -14,7 +14,6 @@ Para realizar un escaneo de la red local y detectar dispositivos conectados, se 
 sudo arp-scan -I eth0 --localnet 
 ```
 
-
 ```
 ┌──(kali㉿kali)-[/etc/arp-scan] 
 └─$ sudo arp-scan -I eth0 --localnet 
@@ -207,7 +206,74 @@ mkt () {
 content  exploits  nmap
 ```
 
+### Análisis del Escaneo `nmap`
 
+```
+sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 192.168.190.130 -oG allPorts
+```
+
+```
+┌──(kali㉿kali)-[~/192.168.190.130/nmap]
+└─$ sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 192.168.190.130 -oG allPorts
+Host discovery disabled (-Pn). All addresses will be marked 'up' and scan times may be slower.
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-13 17:12 EDT
+Initiating ARP Ping Scan at 17:12
+Scanning 192.168.190.130 [1 port]
+Completed ARP Ping Scan at 17:12, 0.04s elapsed (1 total hosts)
+Initiating SYN Stealth Scan at 17:12
+Scanning 192.168.190.130 [65535 ports]
+Discovered open port 22/tcp on 192.168.190.130
+Discovered open port 80/tcp on 192.168.190.130
+Completed SYN Stealth Scan at 17:12, 3.27s elapsed (65535 total ports)
+Nmap scan report for 192.168.190.130
+Host is up, received arp-response (0.00014s latency).
+Scanned at 2024-10-13 17:12:17 EDT for 3s
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack ttl 64
+80/tcp open  http    syn-ack ttl 64
+MAC Address: 00:0C:29:95:75:D5 (VMware)
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 3.42 seconds
+           Raw packets sent: 65536 (2.884MB) | Rcvd: 65536 (2.621MB)
+```
+
+**Desglose del comando**:
+
+- `sudo`: Ejecuta el comando con privilegios de superusuario, necesario para realizar escaneos de red avanzados.
+- `nmap`: Nombre de la herramienta utilizada para escanear redes y descubrir hosts y servicios.
+- `-p-`: Escanea todos los puertos TCP (del 1 al 65535).
+- `--open`: Muestra solo los puertos que están abiertos, omitiendo los cerrados en la salida.
+- `-sS`: Realiza un escaneo SYN (Stealth Scan), enviando paquetes SYN para determinar el estado de los puertos.
+- `--min-rate 5000`: Establece la tasa mínima de paquetes a enviar por segundo a 5000, acelerando el escaneo.
+- `-vvv`: Aumenta el nivel de verbosidad a tres, proporcionando información detallada sobre el escaneo.
+- `-n`: Desactiva la resolución de nombres DNS, acelerando el escaneo al no resolver direcciones IP.
+- `-Pn`: Desactiva la detección de host, asumiendo que el host está activo sin un escaneo previo.
+- `192.168.190.130`: Dirección IP del host a escanear, en este caso, la máquina Darkhole I.
+- `-oG allPorts`: Guarda la salida en formato "grepable" en un archivo llamado allPorts, permitiendo análisis posterior.
+
+**Resultados del Escaneo**
+
+- Host: La dirección IP 192.168.190.130 está activa, como indica el mensaje de respuesta ARP.
+- Puertos Escaneados: Se escanearon todos los 65535 puertos TCP.
+- Puertos Abiertos:
+   - 22/tcp; Estado: Abierto && Servicio: SSH (OpenSSH 8.2p1 Ubuntu)
+   - 80/tcp; Estado: Abierto && Servicio: HTTP (Apache httpd 2.4.41)
+- Puertos Cerrados: Se informa que 65533 puertos están cerrados, lo que significa que no respondieron a los paquetes SYN enviados durante el escaneo.
+- MAC Address: La dirección MAC del host escaneado es 00:0C:29:95:75, que pertenece a VMware.
+
+Abrimos el archivo `allPorts`: 
+
+```
+┌──(kali㉿kali)-[~/192.168.190.130/nmap]
+└─$ cat allPorts
+# Nmap 7.94SVN scan initiated Sun Oct 13 17:12:17 2024 as: nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn -oG allPorts 192.168.190.130
+# Ports scanned: TCP(65535;1-65535) UDP(0;) SCTP(0;) PROTOCOLS(0;)
+Host: 192.168.190.130 ()        Status: Up
+Host: 192.168.190.130 ()        Ports: 22/open/tcp//ssh///, 80/open/tcp//http///        Ignored State: closed (65533)
+# Nmap done at Sun Oct 13 17:12:20 2024 -- 1 IP address (1 host up) scanned in 3.42 seconds
+```
 
 
 
