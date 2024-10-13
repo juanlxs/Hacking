@@ -160,7 +160,22 @@ El valor inicial de TTL puede variar según el sistema operativo. Aquí hay una 
 
 El TTL puede ser una pista útil para determinar el sistema operativo de un dispositivo remoto. Sin embargo, es importante recordar que este método no es infalible, ya que el valor de TTL puede ser modificado por configuraciones de red o políticas de seguridad. Aun así, en la mayoría de los casos, un TTL de `64` es un buen indicador de que el sistema operativo es Linux.
 
+## Estructura de Directorios
 
+Crea una estructura de directorios en tu máquina que sea la siguiente:
+
+```
+192.168.190.100
+├── content
+├── exploits
+└── nmap
+```
+
+- content: Este directorio puede ser utilizado para almacenar cualquier contenido relacionado con la máquina objetivo, como archivos de configuración, scripts, o documentación.
+
+- exploits: Aquí puedes almacenar cualquier exploit que encuentres o desarrolles específicamente para la máquina "Darkhole I".
+
+- nmap: Este directorio puede contener resultados de escaneos realizados con nmap, lo que te ayudará a mantener un registro de los puertos y servicios identificados en la máquina objetivo.
 
 
 
