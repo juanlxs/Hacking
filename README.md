@@ -11,6 +11,11 @@ Este documento se centra en el análisis y la explotación de la máquina "Darkh
 Para realizar un escaneo de la red local y detectar dispositivos conectados, se utilizó el comando `arp-scan`. Esta herramienta permite descubrir direcciones IP y MAC en la misma red local mediante la técnica de ARP (Address Resolution Protocol).
 
 ```
+sudo arp-scan -I eth0 --localnet 
+```
+
+
+```
 ┌──(kali㉿kali)-[/etc/arp-scan] 
 └─$ sudo arp-scan -I eth0 --localnet 
 Interface: eth0, type: EN10MB, MAC: 00:0c:29:33:83:21, IPv4: 192.168.190.100 
