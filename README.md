@@ -165,7 +165,7 @@ El TTL puede ser una pista útil para determinar el sistema operativo de un disp
 Crea una estructura de directorios en tu máquina que sea la siguiente:
 
 ```
-192.168.190.100
+192.168.190.130
 ├── content
 ├── exploits
 └── nmap
