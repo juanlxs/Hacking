@@ -6,7 +6,7 @@ Este documento se centra en el análisis y la explotación de la máquina "Darkh
 
 **Maquina Darkhole I**: [Enlace VulnHUb](https://www.vulnhub.com/entry/darkhole-1,724/)
 
-## Análisis de Red Local con `arp-scan`
+## 1. Análisis de Red Local con `arp-scan`
 
 Para realizar un escaneo de la red local y detectar dispositivos conectados, se utilizó el comando `arp-scan`. Esta herramienta permite descubrir direcciones IP y MAC en la misma red local mediante la técnica de ARP (Address Resolution Protocol).
 
@@ -55,9 +55,8 @@ Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
 
 Indica que el escáner comenzó con un total de 256 direcciones IP en el rango especificado.
 
-**Resultados detectados**
+**Resultados detectados**:
 
-### Resultados detectados:
 
 | Dirección IP      | Dirección MAC           | Fabricante          |
 |-------------------|-------------------------|----------------------|
@@ -72,7 +71,7 @@ Se identificaron cuatro dispositivos en la red, todos fabricados por VMware, Inc
 
 La entrada duplicada para la dirección IP `192.168.190.1` indica que el dispositivo respondió más de una vez durante el escaneo, lo que puede deberse a configuraciones de red específicas o a la existencia de múltiples interfaces.
 
-### Archivos de Referencia para `arp-scan`
+### 1.1. Archivos de Referencia para `arp-scan`
 
 Al utilizar `arp-scan`, es común referirse a dos archivos que contienen información sobre la asignación de direcciones MAC a sus respectivos fabricantes. Estos archivos son:
 
@@ -84,7 +83,7 @@ Al utilizar `arp-scan`, es común referirse a dos archivos que contienen informa
 
 Estos archivos son esenciales para interpretar los resultados obtenidos con `arp-scan`, ya que permiten a los usuarios entender mejor la composición de la red al identificar los fabricantes de los dispositivos conectados.
 
-## Análisis de Conectividad con `ping`
+## 2. Análisis de Conectividad con `ping`
 
 Para analizar la conectividad de diferentes direcciones IP en la red utiliza el comando `ping`. Este comando se utiliza para verificar si un host es accesible en una red IP y mide el tiempo de respuesta de los paquetes enviados.
 
@@ -164,7 +163,7 @@ El valor inicial de TTL puede variar según el sistema operativo. Aquí hay una 
 
 El TTL puede ser una pista útil para determinar el sistema operativo de un dispositivo remoto. Sin embargo, es importante recordar que este método no es infalible, ya que el valor de TTL puede ser modificado por configuraciones de red o políticas de seguridad. Aun así, en la mayoría de los casos, un TTL de `64` es un buen indicador de que el sistema operativo es Linux.
 
-## Estructura de Directorios
+## 3. Estructura de Directorios
 
 Crea una estructura de directorios en tu máquina que sea la siguiente:
 
@@ -206,7 +205,7 @@ mkt () {
 content  exploits  nmap
 ```
 
-### Análisis del Escaneo `nmap`
+### 3.1. Análisis del Escaneo `nmap`
 
 ```
 sudo nmap -p- --open -sS --min-rate 5000 -vvv -n -Pn 192.168.190.130 -oG allPorts
