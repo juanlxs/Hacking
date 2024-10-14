@@ -6,6 +6,10 @@ Este documento se centra en el análisis y la explotación de la máquina "Darkh
 
 **Maquina Darkhole I**: [Enlace VulnHUb](https://www.vulnhub.com/entry/darkhole-1,724/)
 
+**Índice**
+1-[Análisis de Red Local con `arp-scan`](#Análisis-de-Red-Local-con-`arp-scan`)
+
+
 ## 1. Análisis de Red Local con `arp-scan`
 
 Para realizar un escaneo de la red local y detectar dispositivos conectados, se utilizó el comando `arp-scan`. Esta herramienta permite descubrir direcciones IP y MAC en la misma red local mediante la técnica de ARP (Address Resolution Protocol).
