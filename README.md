@@ -7,7 +7,8 @@ Este documento se centra en el análisis y la explotación de la máquina "Darkh
 **Maquina Darkhole I**: [Enlace VulnHUb](https://www.vulnhub.com/entry/darkhole-1,724/)
 
 **Índice**
-1-[Análisis de Red Local con `arp-scan`](#Análisis-de-Red-Local-con-`arp-scan`)
+
+1-[Análisis de Red Local con `arp-scan`](##Analisis-de-Red-Local-con-`arp-scan`)
 
 
 ## 1. Análisis de Red Local con `arp-scan`
