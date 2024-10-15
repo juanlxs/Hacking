@@ -183,14 +183,6 @@ Crea una estructura de directorios en tu máquina que sea la siguiente:
 En mi caso la creado con la función `mkt`:
 
 ```
-┌──(kali㉿kali)-[~/192.168.190.130]
-└─$ which mkt
-mkt () {
-        mkdir {nmap,content,exploits}
-}
-```
-
-```
 ┌──(kali㉿kali)-[~]
 └─$ mkdir 192.168.190.130
 
@@ -274,6 +266,106 @@ Host: 192.168.190.130 ()        Ports: 22/open/tcp//ssh///, 80/open/tcp//http///
 # Nmap done at Sun Oct 13 17:12:20 2024 -- 1 IP address (1 host up) scanned in 3.42 seconds
 ```
 
+Y con la función `extractPorts` resumira lo importante:
+
+```
+extractPorts allPorts 
+```
+
+```
+┌──(kali㉿kali)-[~/192.168.190.130/nmap]
+└─$ extractPorts allPorts 
+
+[*] Extracting information...
+
+        [*] IP Address: 192.168.190.130
+        [*] Open ports: 22,80
+
+[*] Ports copied to clipboard
+```
+
+El siguiente escaneo con nmap proporciona información detallada sobre los puertos abiertos y las versiones de los servicios en ejecución en la máquina "Darkhole I" (192.168.190.130).
+
+```
+sudo nmap -sC -sV -p22,80 192.168.190.130 -oN targeted
+```
+
+```
+┌──(kali㉿kali)-[~/192.168.190.130/nmap]
+└─$ sudo nmap -sC -sV -p22,80 192.168.190.130 -oN targeted                           
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2024-10-15 13:11 EDT
+Nmap scan report for 192.168.190.130
+Host is up (0.0014s latency).
+
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 e4:50:d9:50:5d:91:30:50:e9:b5:7d:ca:b0:51:db:74 (RSA)
+|   256 73:0c:76:86:60:63:06:00:21:c2:36:20:3b:99:c1:f7 (ECDSA)
+|_  256 54:53:4c:3f:4f:3a:26:f6:02:aa:9a:24:ea:1b:92:8c (ED25519)
+80/tcp open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+|_http-title: DarkHole
+| http-cookie-flags: 
+|   /: 
+|     PHPSESSID: 
+|_      httponly flag not set
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.83 seconds
+```
+
+**Desglose del comando** (lo importante):
+
+- `-sC`: Realiza un escaneo de scripts predeterminados.
+- `-sV`: Habilita la detección de versiones.
+- `-oN targeted`: Especifica la salida del escaneo.
+
+**Resumen y Observaciones**
+
+Sistema Operativo: El servicio Nmap indica que el sistema operativo es Linux.
+
+Puertos Abiertos: Los puertos 22 (SSH) y 80 (HTTP) están accesibles, lo que sugiere que puedes intentar acceder a la máquina a través de SSH o explorar la interfaz web alojada en el puerto 80.
+
+Potenciales Puntos de Ataque:
+
+- El puerto 22 (SSH) es un posible punto de entrada para ataques de fuerza bruta o explotación de vulnerabilidades.
+- El puerto 80 (HTTP) sugiere que hay un servidor web corriendo, y se puede realizar un análisis más profundo para descubrir vulnerabilidades en la aplicación web.
+
+Y para ver que distribución de Ubuntu nos encontramos, buscaremos en el navegador:
+
+```
+launchpad OpenSSH 8.2p1 Ubuntu 4ubuntu0.2
+```
+
+```
+launchpad Apache httpd 2.4.41
+```
+
+Al buscar estas versiones, deberías encontrar información que te indique que es un Ubuntu Focal.
+
+
+**OJO!!!** Si vemos dos distribuciones distintas, a lo mejor nos encontramos con contenedores.
+
+Con el comando `whatweb` te proporciona información sobre el sitio web que está corriendo en http://192.168.190.130.
+
+```
+whatweb http://192.168.190.130
+```
+
+```
+┌──(kali㉿kali)-[~/192.168.190.130/nmap]
+└─$ whatweb http://192.168.190.130
+http://192.168.190.130 [200 OK] Apache[2.4.41], Cookies[PHPSESSID], Country[RESERVED][ZZ], HTTPServer[Ubuntu Linux][Apache/2.4.41 (Ubuntu)], IP[192.168.190.130], Title[DarkHole]
+```
+
+**Resumen y Observaciones**
+
+- Servidor Web: Apache 2.4.41
+- Sistema Operativo: Ubuntu Linux
+- Cookies: Se está utilizando PHPSESSID para la gestión de sesiones.
+- Título de la Página: "DarkHole"
 
 
 
