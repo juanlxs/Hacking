@@ -105,7 +105,8 @@ class GuiKiosk:
         t = Thread(target=_update)
         t.start()
         self.label.after(10000, self.update)
-
+"""
+"""
 
 # ========================
 # 🧩 Interfaz Principal
